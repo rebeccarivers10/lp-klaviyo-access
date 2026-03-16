@@ -163,10 +163,7 @@ export default function KlaviyoAccess() {
           </p>
         </div>
         <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8, opacity: 0.4 }}>
-          <div style={{ width: 24, height: 24, background: "#1a3a5c", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ fontWeight: 800, fontSize: 10, color: "#fff" }}>LP</span>
-          </div>
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#1a3a5c" }}>Logical Position</span>
+          <img src="https://www.logicalposition.com/img/logos/lp-logo-white-horizontal.svg" alt="Logical Position" style={{ height: 18, filter: "brightness(0)" }} />
         </div>
       </div>
     );
@@ -176,10 +173,7 @@ export default function KlaviyoAccess() {
     <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }}>
       <div style={{ width: "100%", background: "linear-gradient(135deg, #1a3a5c 0%, #2d6ca6 100%)", padding: "28px 20px 36px", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-          <div style={{ width: 28, height: 28, background: "#fff", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ fontWeight: 800, fontSize: 11, color: "#1a3a5c" }}>LP</span>
-          </div>
-          <span style={{ color: "#fff", fontSize: 13, fontWeight: 600, letterSpacing: 0.8 }}>LOGICAL POSITION</span>
+          <img src="https://www.logicalposition.com/img/logos/lp-logo-white-horizontal.svg" alt="Logical Position" style={{ height: 28 }} />
         </div>
         <h1 style={{ margin: "0 0 8px 0", fontSize: 24, fontWeight: 800, color: "#fff" }}>
           Grant Klaviyo Access
