@@ -193,7 +193,7 @@ export default function KlaviyoAccess() {
 
         {step === 1 && (
           <StepCard stepNum={2} totalSteps={totalSteps} title="Open your account Settings" description="Click your account name in the bottom-left corner of the Klaviyo dashboard. Then click Settings from the menu that appears." onBack={goBack} onNext={goNext} nextLabel="Done">
-            <img src="/images/klaviyo-homepage.png" alt="Klaviyo Homepage - click Settings in bottom-left" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0" }} />
+            <img src="/images/klaviyo-homepage.png" alt="Klaviyo Homepage - click Settings in bottom-left" style={{ width: "100%", maxWidth: "none", borderRadius: 10, border: "1px solid #e2e8f0", cursor: "pointer" }} onClick={function(e) { e.target.style.transform = e.target.style.transform === "scale(1.5)" ? "scale(1)" : "scale(1.5)"; e.target.style.transition = "transform 0.3s ease"; e.target.style.zIndex = e.target.style.transform === "scale(1)" ? "0" : "10"; e.target.style.position = "relative"; }} />
           </StepCard>
         )}
 
@@ -208,7 +208,7 @@ export default function KlaviyoAccess() {
 
         {step === 3 && (
           <StepCard stepNum={4} totalSteps={totalSteps} title="Click Add User" description="On the Users page, you will see an Add User button. Click it to open the invitation form." onBack={goBack} onNext={goNext} nextLabel="The form is open">
-            <img src="/images/step4-add-user.png" alt="Click Add User button" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0" }} />
+            <img src="/images/step4-add-user.png" alt="Click Add User button" style={{ width: "100%", maxWidth: "none", borderRadius: 10, border: "1px solid #e2e8f0", cursor: "pointer" }} onClick={function(e) { e.target.style.transform = e.target.style.transform === "scale(1.5)" ? "scale(1)" : "scale(1.5)"; e.target.style.transition = "transform 0.3s ease"; e.target.style.zIndex = e.target.style.transform === "scale(1)" ? "0" : "10"; e.target.style.position = "relative"; }} />
           </StepCard>
         )}
 
