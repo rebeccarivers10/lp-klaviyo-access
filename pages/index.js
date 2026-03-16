@@ -1,5 +1,15 @@
 import { useState } from "react";
 
+function KlaviyoIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 10, background: "#111", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M2 19L12 5l10 14H2z" fill="#fff"/>
+      </svg>
+    </div>
+  );
+}
+
 function ProgressDots(props) {
   var total = props.total;
   var current = props.current;
@@ -105,9 +115,10 @@ export default function KlaviyoAccess() {
     setTimeout(function () { setCopied(false); }, 2500);
   }
 
+  // Completed screen
   if (step >= totalSteps) {
     return (
-      <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 20, fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }}>
+      <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 20, fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
         <div style={{ maxWidth: 480, width: "100%", textAlign: "center", background: "#fff", borderRadius: 16, padding: "48px 32px", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
           <div style={{
             width: 80, height: 80, borderRadius: "50%",
@@ -120,13 +131,13 @@ export default function KlaviyoAccess() {
             </svg>
           </div>
           <h2 style={{ margin: "0 0 12px 0", fontSize: 26, fontWeight: 700, color: "#1a202c" }}>
-            You are all set!
+            You're all set!
           </h2>
           <p style={{ margin: "0 0 8px 0", fontSize: 16, color: "#4a5568", lineHeight: 1.7 }}>
-            Thank you for granting access. We have been notified and will accept the invitation shortly.
+            Thank you for granting access. We've been notified and will accept the invitation shortly.
           </p>
           <p style={{ margin: 0, fontSize: 14, color: "#a0aec0", lineHeight: 1.6 }}>
-            You do not need to do anything else. If you have questions, contact your Logical Position representative.
+            You don't need to do anything else. If you have questions, contact your Logical Position representative.
           </p>
         </div>
         <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8, opacity: 0.4 }}>
@@ -140,7 +151,9 @@ export default function KlaviyoAccess() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+
+      {/* Header */}
       <div style={{ width: "100%", background: "linear-gradient(135deg, #1a3a5c 0%, #2d6ca6 100%)", padding: "28px 20px 36px", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
           <div style={{ width: 28, height: 28, background: "#fff", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -156,11 +169,12 @@ export default function KlaviyoAccess() {
         </p>
       </div>
 
+      {/* Card area */}
       <div style={{ padding: "32px 20px 40px", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <ProgressDots total={totalSteps} current={step} onDotClick={setStep} />
 
         {step === 0 && (
-          <StepCard stepNum={1} totalSteps={totalSteps} title="Log in to Klaviyo" description="Open a new tab and sign in with the account credentials for the Klaviyo account you would like to share with us." onNext={goNext} nextLabel="I am logged in">
+          <StepCard stepNum={1} totalSteps={totalSteps} title="Log in to Klaviyo" onNext={goNext} nextLabel="I'm logged in" description="Open a new tab and sign in with the account credentials for the Klaviyo account you'd like to share with us.">
             <a href="https://www.klaviyo.com/login" target="_blank" rel="noopener noreferrer" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               padding: "12px 20px", borderRadius: 10, background: "#111", color: "#fff",
@@ -172,45 +186,35 @@ export default function KlaviyoAccess() {
               Open klaviyo.com
             </a>
             <div style={{ padding: "14px 16px", background: "#f0f7ff", borderRadius: 10, borderLeft: "3px solid #2d6ca6", fontSize: 13, color: "#2d5f8a", lineHeight: 1.6 }}>
-              <strong>Note:</strong> You need to be an Owner or Admin on the Klaviyo account to add users. If you are unsure, proceed to the next step and you will find out.
+              <strong>Note:</strong> You need to be an Owner or Admin on the Klaviyo account to add users. If you're unsure, proceed to the next step and you'll find out.
             </div>
           </StepCard>
         )}
 
         {step === 1 && (
           <StepCard stepNum={2} totalSteps={totalSteps} title="Open your account Settings" description="Click your account name in the bottom-left corner of the Klaviyo dashboard. Then click Settings from the menu that appears." onBack={goBack} onNext={goNext} nextLabel="Done">
-            <div style={{ background: "#f7fafc", border: "2px dashed #cbd5e0", borderRadius: 10, padding: 20, textAlign: "center" }}>
-              <img src="/images/Klaviyo Homepage.png" alt="Click Settings in bottom-left" style={{
-  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0"
-}} />
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#edf2f7", borderRadius: 8, padding: "8px 14px" }}>
-                <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#38a169" }} />
-                <span style={{ fontSize: 14, fontWeight: 600, color: "#2d3748" }}>Your Account Name</span>
-              </div>
-              <div style={{ fontSize: 12, color: "#a0aec0", marginTop: 8 }}>Bottom-left corner of the sidebar</div>
-            </div>
+            <img src="/images/klaviyo-homepage.png" alt="Klaviyo Homepage - click Settings in bottom-left" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0" }} />
           </StepCard>
         )}
 
         {step === 2 && (
           <StepCard stepNum={3} totalSteps={totalSteps} title="Click Users in the sidebar" description="On the Settings page, find Users in the left sidebar and click it. This will show you the list of current users on the account." onBack={goBack} onNext={goNext} nextLabel="I see the Users page">
+            <img src="/images/step3-users.png" alt="Click Users in the sidebar" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12 }} />
             <div style={{ padding: "14px 16px", background: "#f0f7ff", borderRadius: 10, borderLeft: "3px solid #2d6ca6", fontSize: 13, color: "#2d5f8a", lineHeight: 1.6 }}>
-          <img src="/images/step 3 users.png" alt="Click Users in sidebar" style={{
-  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12
-}} />   
-          <strong>Do not see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
+              <strong>Don't see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
             </div>
           </StepCard>
         )}
 
         {step === 3 && (
-          <StepCard stepNum={4} totalSteps={totalSteps} title="Click Add User" description="On the Users page, you will see an Add User button. Click it to open the invitation form." onBack={goBack} onNext={goNext} nextLabel="The form is open" />
-        )<img src="/images/step 4 add user.png" alt="Click Add User button" style={{
-  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12
-}} />}
+          <StepCard stepNum={4} totalSteps={totalSteps} title="Click Add User" description="On the Users page, you will see an Add User button. Click it to open the invitation form." onBack={goBack} onNext={goNext} nextLabel="The form is open">
+            <img src="/images/step4-add-user.png" alt="Click Add User button" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0" }} />
+          </StepCard>
+        )}
 
         {step === 4 && (
           <StepCard stepNum={5} totalSteps={totalSteps} title="Enter our details" description="Copy the email address below and paste it into the email field. Then select the Analyst role from the role dropdown." onBack={goBack} onNext={goNext} nextLabel="Details entered">
+            {/* Email */}
             <div
               onClick={copyEmail}
               style={{
@@ -233,6 +237,7 @@ export default function KlaviyoAccess() {
                 {copied ? "Copied!" : "Copy"}
               </div>
             </div>
+            {/* Role */}
             <div style={{
               display: "flex", alignItems: "center",
               background: "#f7fafc", border: "2px solid #e2e8f0",
@@ -272,6 +277,7 @@ export default function KlaviyoAccess() {
           </StepCard>
         )}
 
+        {/* Footer */}
         <div style={{ marginTop: 40, textAlign: "center", color: "#a0aec0", fontSize: 12 }}>
           <p style={{ margin: "0 0 4px 0" }}>Questions? Contact your Logical Position representative.</p>
           <p style={{ margin: 0 }}>Powered by Logical Position</p>
