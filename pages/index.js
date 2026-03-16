@@ -1,4 +1,4 @@
-import { useState } from "react";
+<StepCard stepNum={6} totalSteps={totalSteps} title="Send the invitation" description="Click Send Invitation in Klaviyo. We will receive the invite on our end and accept it right away. You are done!" onBack={goBack} onNext={submitToHubSpot} nextLabel="I have sentimport { useState } from "react";
 
 function ProgressDots(props) {
   var total = props.total;
@@ -167,6 +167,34 @@ export default function KlaviyoAccess() {
 
   function goNext() { setStep(step + 1); }
   function goBack() { setStep(step - 1); }
+
+  function submitToHubSpot() {
+    var portalId = "2686234";
+    var formGuid = "REPLACE_WITH_YOUR_FORM_GUID";
+    var submitUrl = "https://api.hsforms.com/submissions/v3/integration/submit/" + portalId + "/" + formGuid;
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var companyName = urlParams.get("company") || "Unknown Company";
+
+    var data = {
+      fields: [
+        { name: "email", value: "klaviyo-confirmation@logicalposition.com" },
+        { name: "company", value: companyName + " - confirmed Klaviyo access" }
+      ],
+      context: {
+        pageUri: window.location.href,
+        pageName: "Klaviyo Access Request"
+      }
+    };
+
+    fetch(submitUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }).catch(function() {});
+
+    setStep(step + 1);
+  }
 
   function copyEmail() {
     try { navigator.clipboard.writeText(email); } catch (e) {}
