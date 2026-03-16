@@ -31,35 +31,67 @@ function ProgressDots(props) {
   );
 }
 
-function ZoomImage(props) {
-  var zoomState = useState(false);
-  var zoomed = zoomState[0];
-  var setZoomed = zoomState[1];
-
+function Lightbox(props) {
+  if (!props.src) return null;
   return (
-    <div style={{ overflow: "hidden", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: props.mb || 0, cursor: "pointer", position: "relative" }}
-      onClick={function() { setZoomed(!zoomed); }}>
+    <div
+      onClick={props.onClose}
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+        background: "rgba(0,0,0,0.85)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        zIndex: 9999, cursor: "zoom-out",
+        padding: 20
+      }}
+    >
+      <div style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}>
+        <img
+          src={props.src}
+          alt={props.alt || ""}
+          style={{
+            maxWidth: "90vw",
+            maxHeight: "85vh",
+            borderRadius: 12,
+            boxShadow: "0 8px 40px rgba(0,0,0,0.5)"
+          }}
+        />
+        <div style={{
+          position: "absolute", top: -40, right: 0,
+          color: "#fff", fontSize: 14, fontWeight: 600, opacity: 0.7
+        }}>
+          Click anywhere to close
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScreenImage(props) {
+  return (
+    <div
+      onClick={function() { props.onOpen(props.src, props.alt); }}
+      style={{
+        position: "relative", borderRadius: 10, overflow: "hidden",
+        border: "1px solid #e2e8f0", cursor: "zoom-in",
+        marginBottom: props.mb || 0
+      }}
+    >
       <img
         src={props.src}
         alt={props.alt}
-        style={{
-          width: "100%",
-          display: "block",
-          transform: zoomed ? "scale(1.8)" : "scale(1)",
-          transformOrigin: "center center",
-          transition: "transform 0.3s ease"
-        }}
+        style={{ width: "100%", display: "block" }}
       />
-      {!zoomed && (
-        <div style={{
-          position: "absolute", bottom: 8, right: 8,
-          background: "rgba(0,0,0,0.6)", color: "#fff",
-          fontSize: 11, fontWeight: 600, padding: "4px 8px",
-          borderRadius: 6
-        }}>
-          Click to zoom
-        </div>
-      )}
+      <div style={{
+        position: "absolute", bottom: 8, right: 8,
+        background: "rgba(0,0,0,0.6)", color: "#fff",
+        fontSize: 11, fontWeight: 600, padding: "4px 10px",
+        borderRadius: 6, display: "flex", alignItems: "center", gap: 4
+      }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Click to enlarge
+      </div>
     </div>
   );
 }
@@ -126,6 +158,10 @@ export default function KlaviyoAccess() {
   var copied = copiedState[0];
   var setCopied = copiedState[1];
 
+  var lightboxState = useState(null);
+  var lightboxImg = lightboxState[0];
+  var setLightboxImg = lightboxState[1];
+
   var email = "LPEmailAudit@logicalposition.com";
   var totalSteps = 6;
 
@@ -136,6 +172,14 @@ export default function KlaviyoAccess() {
     try { navigator.clipboard.writeText(email); } catch (e) {}
     setCopied(true);
     setTimeout(function () { setCopied(false); }, 2500);
+  }
+
+  function openLightbox(src, alt) {
+    setLightboxImg({ src: src, alt: alt });
+  }
+
+  function closeLightbox() {
+    setLightboxImg(null);
   }
 
   if (step >= totalSteps) {
@@ -171,6 +215,11 @@ export default function KlaviyoAccess() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#f7fafc", display: "flex", flexDirection: "column", alignItems: "center", fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }}>
+
+      {lightboxImg && (
+        <Lightbox src={lightboxImg.src} alt={lightboxImg.alt} onClose={closeLightbox} />
+      )}
+
       <div style={{ width: "100%", background: "linear-gradient(135deg, #1a3a5c 0%, #2d6ca6 100%)", padding: "28px 20px 36px", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
           <img src="https://www.logicalposition.com/img/logos/lp-logo-white-horizontal.svg" alt="Logical Position" style={{ height: 28 }} />
@@ -206,13 +255,13 @@ export default function KlaviyoAccess() {
 
         {step === 1 && (
           <StepCard stepNum={2} totalSteps={totalSteps} title="Open your account Settings" description="Click your account name in the bottom-left corner of the Klaviyo dashboard. Then click Settings from the menu that appears." onBack={goBack} onNext={goNext} nextLabel="Done">
-            <ZoomImage src="/images/klaviyo-homepage.png" alt="Klaviyo Homepage - click Settings in bottom-left" />
+            <ScreenImage src="/images/klaviyo-homepage.png" alt="Klaviyo Homepage - click Settings in bottom-left" onOpen={openLightbox} />
           </StepCard>
         )}
 
         {step === 2 && (
           <StepCard stepNum={3} totalSteps={totalSteps} title="Click Users in the sidebar" description="On the Settings page, find Users in the left sidebar and click it. This will show you the list of current users on the account." onBack={goBack} onNext={goNext} nextLabel="I see the Users page">
-            <ZoomImage src="/images/step3-users.png" alt="Click Users in sidebar" mb={12} />
+            <ScreenImage src="/images/step3-users.png" alt="Click Users in sidebar" onOpen={openLightbox} mb={12} />
             <div style={{ padding: "14px 16px", background: "#f0f7ff", borderRadius: 10, borderLeft: "3px solid #2d6ca6", fontSize: 13, color: "#2d5f8a", lineHeight: 1.6 }}>
               <strong>Do not see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
             </div>
@@ -221,7 +270,7 @@ export default function KlaviyoAccess() {
 
         {step === 3 && (
           <StepCard stepNum={4} totalSteps={totalSteps} title="Click Add User" description="On the Users page, you will see an Add User button. Click it to open the invitation form." onBack={goBack} onNext={goNext} nextLabel="The form is open">
-            <ZoomImage src="/images/step4-add-user.png" alt="Click Add User button" />
+            <ScreenImage src="/images/step4-add-user.png" alt="Click Add User button" onOpen={openLightbox} />
           </StepCard>
         )}
 
