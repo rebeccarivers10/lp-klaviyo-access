@@ -198,7 +198,7 @@ export default function KlaviyoAccess() {
         )}
 
         {step === 2 && (
-          <StepCard stepNum={3} totalSteps={totalSteps} title="Click Users in the sidebar" description="On the Settings page, find Users in the left sidebar and click it. This will show you the list of current users on the account." onBack={goBack} onNext={goNext} nextLabel="I see the Users page">
+        <StepCard stepNum={3} totalSteps={totalSteps} title="Click Users in the sidebar" description="On the Settings page, find Users in the left sidebar and click it. This will show you the list of current users on the account." onBack={goBack} onNext={goNext} nextLabel="I see the Users page">
             <img src="/images/step3-users.png" alt="Click Users in the sidebar" style={{ width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12 }} />
             <div style={{ padding: "14px 16px", background: "#f0f7ff", borderRadius: 10, borderLeft: "3px solid #2d6ca6", fontSize: 13, color: "#2d5f8a", lineHeight: 1.6 }}>
               <strong>Don't see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
