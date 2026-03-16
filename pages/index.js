@@ -180,7 +180,9 @@ export default function KlaviyoAccess() {
         {step === 1 && (
           <StepCard stepNum={2} totalSteps={totalSteps} title="Open your account Settings" description="Click your account name in the bottom-left corner of the Klaviyo dashboard. Then click Settings from the menu that appears." onBack={goBack} onNext={goNext} nextLabel="Done">
             <div style={{ background: "#f7fafc", border: "2px dashed #cbd5e0", borderRadius: 10, padding: 20, textAlign: "center" }}>
-              <div style={{ fontSize: 13, color: "#718096", marginBottom: 6 }}>Look for your account name here:</div>
+              <img src="/Klaviyo Homepage.png" alt="Click Settings in bottom-left" style={{
+  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0"
+}} />
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#edf2f7", borderRadius: 8, padding: "8px 14px" }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#38a169" }} />
                 <span style={{ fontSize: 14, fontWeight: 600, color: "#2d3748" }}>Your Account Name</span>
@@ -193,14 +195,19 @@ export default function KlaviyoAccess() {
         {step === 2 && (
           <StepCard stepNum={3} totalSteps={totalSteps} title="Click Users in the sidebar" description="On the Settings page, find Users in the left sidebar and click it. This will show you the list of current users on the account." onBack={goBack} onNext={goNext} nextLabel="I see the Users page">
             <div style={{ padding: "14px 16px", background: "#f0f7ff", borderRadius: 10, borderLeft: "3px solid #2d6ca6", fontSize: 13, color: "#2d5f8a", lineHeight: 1.6 }}>
-              <strong>Do not see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
+          <img src="/step 3 users.png" alt="Click Users in sidebar" style={{
+  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12
+}} />   
+          <strong>Do not see Users?</strong> You may not have Admin or Owner access. Please forward this link to the person who originally created your Klaviyo account.
             </div>
           </StepCard>
         )}
 
         {step === 3 && (
           <StepCard stepNum={4} totalSteps={totalSteps} title="Click Add User" description="On the Users page, you will see an Add User button. Click it to open the invitation form." onBack={goBack} onNext={goNext} nextLabel="The form is open" />
-        )}
+        )<img src="/step 4 add user.png" alt="Click Add User button" style={{
+  width: "100%", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 12
+}} />}
 
         {step === 4 && (
           <StepCard stepNum={5} totalSteps={totalSteps} title="Enter our details" description="Copy the email address below and paste it into the email field. Then select the Analyst role from the role dropdown." onBack={goBack} onNext={goNext} nextLabel="Details entered">
